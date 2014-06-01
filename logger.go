@@ -11,22 +11,25 @@ type Logger struct {
 	Formatter Formatter
 	Writer    io.Writer
 	Host      string
+	MaxLevel  LogLevel
 }
 
 func (logger *Logger) LogE(event LogEvent) error {
-	bytes, err := logger.Formatter.Format(event)
-	if err != nil {
-		return err
-	}
-	_, err = logger.Writer.Write(append(bytes, '\n'))
-	if err != nil {
-		return err
+	if event.Level <= logger.MaxLevel {
+		bytes, err := logger.Formatter.Format(event)
+		if err != nil {
+			return err
+		}
+		_, err = logger.Writer.Write(append(bytes, '\n'))
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
 
 func StdoutLogger(formatter Formatter) *Logger {
-	return &Logger{Formatter: formatter, Writer: os.Stdout}
+	return &Logger{Formatter: formatter, Writer: os.Stdout, Host: "", MaxLevel: Debug}
 }
 
 func (logger *Logger) LogL(level LogLevel, message, long_message string, extras Extras) error {
