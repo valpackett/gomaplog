@@ -44,3 +44,67 @@ func (logger *Logger) LogL(level LogLevel, message, long_message string, extras 
 func (logger *Logger) Log(level LogLevel, message string, extras Extras) error {
 	return logger.LogL(level, message, "", extras)
 }
+
+func (logger *Logger) EmergencyL(message, long_message string, extras Extras) error {
+	return logger.LogL(Emergency, message, long_message, extras)
+}
+
+func (logger *Logger) Emergency(message string, extras Extras) error {
+	return logger.LogL(Emergency, message, "", extras)
+}
+
+func (logger *Logger) AlertL(message, long_message string, extras Extras) error {
+	return logger.LogL(Alert, message, long_message, extras)
+}
+
+func (logger *Logger) Alert(message string, extras Extras) error {
+	return logger.LogL(Alert, message, "", extras)
+}
+
+func (logger *Logger) CriticalL(message, long_message string, extras Extras) error {
+	return logger.LogL(Critical, message, long_message, extras)
+}
+
+func (logger *Logger) Critical(message string, extras Extras) error {
+	return logger.LogL(Critical, message, "", extras)
+}
+
+func (logger *Logger) ErrorL(message, long_message string, extras Extras) error {
+	return logger.LogL(Error, message, long_message, extras)
+}
+
+func (logger *Logger) Error(message string, extras Extras) error {
+	return logger.LogL(Error, message, "", extras)
+}
+
+func (logger *Logger) WarningL(message, long_message string, extras Extras) error {
+	return logger.LogL(Warning, message, long_message, extras)
+}
+
+func (logger *Logger) Warning(message string, extras Extras) error {
+	return logger.LogL(Warning, message, "", extras)
+}
+
+func (logger *Logger) NoticeL(message, long_message string, extras Extras) error {
+	return logger.LogL(Notice, message, long_message, extras)
+}
+
+func (logger *Logger) Notice(message string, extras Extras) error {
+	return logger.LogL(Notice, message, "", extras)
+}
+
+func (logger *Logger) InfoL(message, long_message string, extras Extras) error {
+	return logger.LogL(Info, message, long_message, extras)
+}
+
+func (logger *Logger) Info(message string, extras Extras) error {
+	return logger.LogL(Info, message, "", extras)
+}
+
+func (logger *Logger) DebugL(message, long_message string, extras Extras) error {
+	return logger.LogL(Debug, message, long_message, extras)
+}
+
+func (logger *Logger) Debug(message string, extras Extras) error {
+	return logger.LogL(Debug, message, "", extras)
+}
