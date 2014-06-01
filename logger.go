@@ -3,6 +3,7 @@ package gomaplog
 import (
 	"io"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -33,7 +34,15 @@ func StdoutLogger(formatter Formatter) *Logger {
 }
 
 func (logger *Logger) LogL(level LogLevel, message, long_message string, extras Extras) error {
-	return logger.LogE(LogEvent{Level: level, Host: logger.Host, Message: message, LongMessage: long_message, Timestamp: time.Now(), Extras: extras})
+	msgParts := strings.Split(message, "\n")
+	longMsg := strings.Join(msgParts[1:], "\n")
+	if long_message != "" && longMsg != "" {
+		longMsg += "\n"
+	}
+	if long_message != "" {
+		longMsg += long_message
+	}
+	return logger.LogE(LogEvent{Level: level, Host: logger.Host, Message: msgParts[0], LongMessage: longMsg, Timestamp: time.Now(), Extras: extras})
 }
 
 func (logger *Logger) Log(level LogLevel, message string, extras Extras) error {
