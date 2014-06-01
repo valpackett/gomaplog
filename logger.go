@@ -18,11 +18,7 @@ func (logger *Logger) LogE(event LogEvent) error {
 	if err != nil {
 		return err
 	}
-	_, err = logger.Writer.Write(bytes)
-	if err != nil {
-		return err
-	}
-	_, err = logger.Writer.Write([]byte{'\n'})
+	_, err = logger.Writer.Write(append(bytes, '\n'))
 	if err != nil {
 		return err
 	}
