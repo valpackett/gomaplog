@@ -43,6 +43,6 @@ func (event *LogEvent) LevelColor() string {
 	return ""
 }
 
-func (event *LogEvent) TimeISO() string {
+func (event *LogEvent) TimeRFC3339() string {
 	return event.Timestamp.Format(time.RFC3339)
 }
