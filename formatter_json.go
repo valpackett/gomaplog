@@ -24,3 +24,5 @@ func (formatter *JSONFormatter) Format(event LogEvent) ([]byte, error) {
 	}
 	return json.Marshal(outMap)
 }
+
+var DefaultJSONFormatter = &JSONFormatter{}
