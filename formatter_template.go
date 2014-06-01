@@ -21,7 +21,9 @@ func (formatter *TemplateFormatter) Format(event LogEvent) ([]byte, error) {
 }
 
 func Collapse(str string) string {
-	return strings.Join(strings.Split(str, "\n"), " ")
+	s := strings.Join(strings.Split(str, "\n"), " ")
+	s = strings.Join(strings.Split(str, "  "), " ")
+	return s
 }
 
 var DefaultTemplateFormatter = &TemplateFormatter{Template: template.Must(template.New("default").Funcs(template.FuncMap{"Collapse": Collapse}).Parse(
