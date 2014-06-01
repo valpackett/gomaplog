@@ -19,8 +19,5 @@ func (formatter *TemplateFormatter) Format(event LogEvent) ([]byte, error) {
 	}
 }
 
-func DefaultTemplateFormatter() *TemplateFormatter {
-	tpl := template.Must(template.New("default").Parse(
-		`=[{{.Magenta}}{{.Bold}}{{.Host}}{{.Reset}}]=[{{.LevelColor}}{{.Level}}{{.Reset}}]=[{{.Yellow}}{{.TimeRFC3339}}{{.Reset}}]=> {{.Blue}}{{.Bold}}message{{.Reset}}={{.Message}}{{range $key, $value := .Extras}}  {{$.Blue}}{{$.Bold}}{{$key}}{{$.Reset}}={{$value}}{{end}}`))
-	return &TemplateFormatter{Template: tpl}
-}
+var DefaultTemplateFormatter = &TemplateFormatter{Template: template.Must(template.New("default").Parse(
+	`=[{{.Magenta}}{{.Bold}}{{.Host}}{{.Reset}}]=[{{.LevelColor}}{{.Level}}{{.Reset}}]=[{{.Yellow}}{{.TimeRFC3339}}{{.Reset}}]=> {{.Blue}}{{.Bold}}message{{.Reset}}={{.Message}}{{range $key, $value := .Extras}}  {{$.Blue}}{{$.Bold}}{{$key}}{{$.Reset}}={{$value}}{{end}}`))}
