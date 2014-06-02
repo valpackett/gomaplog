@@ -111,3 +111,10 @@ func (logger *Logger) DebugL(message, long_message string, extras Extras) error 
 func (logger *Logger) Debug(message string, extras Extras) error {
 	return logger.LogL(Debug, message, "", extras)
 }
+
+func (logger *Logger) HandlePanic() {
+	if r := recover(); r != nil {
+		logger.Error("Fatal error", Extras{"error": r})
+		os.Exit(1)
+	}
+}
