@@ -4,6 +4,7 @@ import (
 	"io"
 	"os"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -12,10 +13,13 @@ type Logger struct {
 	Writer    io.Writer
 	Host      string
 	MaxLevel  LogLevel
+	sync.Mutex
 }
 
 func (logger *Logger) LogE(event LogEvent) error {
 	if event.Level <= logger.MaxLevel {
+		logger.Lock()
+		defer logger.Unlock()
 		bytes, err := logger.Formatter.Format(event)
 		if err != nil {
 			return err
