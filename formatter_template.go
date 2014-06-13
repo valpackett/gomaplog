@@ -21,8 +21,9 @@ func (formatter *TemplateFormatter) Format(event LogEvent) ([]byte, error) {
 }
 
 func Collapse(str string) string {
-	s := strings.Join(strings.Split(str, "\n"), " ")
-	s = strings.Join(strings.Split(str, "  "), " ")
+	s := str
+	s = strings.Join(strings.Split(s, "\n"), " ")
+	s = strings.Join(strings.Split(s, "  "), " ")
 	return s
 }
 
