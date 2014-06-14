@@ -2,6 +2,7 @@ package gomaplog
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 	"text/template"
 )
@@ -11,6 +12,9 @@ type TemplateFormatter struct {
 }
 
 func (formatter *TemplateFormatter) Format(event LogEvent) ([]byte, error) {
+	for k, v := range event.Extras {
+		event.Extras[k] = fmt.Sprintf("%v", v)
+	}
 	var buf bytes.Buffer
 	err := formatter.Template.Execute(&buf, &event)
 	if err != nil {
